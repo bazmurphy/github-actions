@@ -21,6 +21,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+      - name: List Files Debug
+        run: ls
       - name: Install Dependencies
         # "ci" is an npm feature that makes sure we are using the exact same versions of the packages that are in the package-lock.json
         run: npm ci # npm install is less safe
