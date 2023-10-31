@@ -1,0 +1,29 @@
+name: Test the Second-Action Project
+on:
+  push:
+    paths:
+      - "second-action/**"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        # when you want to use an Action, you use the uses keyword, not the run keyword
+        # and you can specify a version
+        # https://github.com/actions/checkout/
+        uses: actions/checkout@v4
+        # the uses keyword can be combined with the with: keyword
+        # and you can see the options you can use with: on the documentation
+        # https://github.com/marketplace/actions/checkout
+        # with:
+        #   some-option: some-value
+      - name: Install NodeJS
+        # https://github.com/actions/setup-node/
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Dependencies
+        # "ci" is an npm feature that makes sure we are using the exact same versions of the packages that are in the package-lock.json
+        run: npm ci # npm install is less safe
+      - name: Run Tests
+        run: npm test
