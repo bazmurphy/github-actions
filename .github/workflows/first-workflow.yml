@@ -18,3 +18,9 @@ jobs:
         run: echo "Hello!"
       - name: Print Goodbye (Second Step)
         run: echo "Goodbye!"
+      - name: Run Multiple Commands (Third Step)
+        # we can use the | pipe symbol to run multiple commands in a single run
+        run: |
+          echo "We can use the Pipe Symbol |"
+          echo "To run multiple commands in a single run"
+          echo "Like this..."
