@@ -1,0 +1,20 @@
+# name: Workflow Name
+name: First Workflow
+# on: When this Workflow will be Triggered
+# workflow_dispatch is an Event that waits for the User to manually start this Workflow
+on: workflow_dispatch
+# jobs: The Jobs that must be Executed
+jobs:
+  # you give the first Job a name
+  first-job:
+    # runs-on: Define the Runner on which this Job will Execute the Steps
+    runs-on: ubuntu-latest
+    # steps: a List of Steps to Execute
+    steps:
+      # multiple key value pairs that describe the Steps
+      # name: give the Step a name
+      - name: Print Greeting (First Step)
+        # run: what to Execute in the Command Line
+        run: echo "Hello!"
+      - name: Print Goodbye (Second Step)
+        run: echo "Goodbye!"
