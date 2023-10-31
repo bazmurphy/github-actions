@@ -35,7 +35,12 @@ jobs:
       - name: Run Tests
         run: npm test
   # we add a second job
+  # (!) multiple jobs in a workflow run in Parallel (by default)
   deploy:
+    # to instead run these Sequentially,
+    # we can use the "needs" keyword and give it the identifier of another job which needs to finish successfully before it starts
+    # you can optionally provide multiple jobs [job1, job2]
+    needs: test
     # (!) remember every job has its own runner, so we must define it
     runs-on: ubuntu-latest
     steps:
