@@ -20,6 +20,6 @@ describe("MainContent", () => {
       await userEvent.click(button);
     });
 
-    expect(screen.getByTestId("help-area")).toBeInTheDocument();
+    expect(screen.getByTestId("help-area")).not.toBeInTheDocument();
   });
 });
