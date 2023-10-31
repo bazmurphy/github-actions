@@ -2,11 +2,16 @@ name: Test the Second-Action Project
 on: push
 
 defaults:
+  # set the working directory for all run steps in the workflow (does not affect "uses" Actions)
   run:
     working-directory: second-action
 
 jobs:
   test:
+    # defaults:
+    #   # alternatively set the working directory for all job steps in this specific "test" job (does not affect "uses" Actions)
+    #   run:
+    #     working-directory: second-action
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
