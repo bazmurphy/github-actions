@@ -17,6 +17,8 @@ jobs:
         # https://github.com/marketplace/actions/checkout
         # with:
         #   some-option: some-value
+      - name: Change to Second-Action Directory
+        run: cd second-action
       - name: Install NodeJS
         # https://github.com/actions/setup-node/
         uses: actions/setup-node@v4
