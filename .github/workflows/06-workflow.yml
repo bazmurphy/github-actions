@@ -25,8 +25,8 @@ on:
       - "03-project/**"
     # files in the specified folder(s) will not trigger the Workflow
     # if a file in the specified folder is changed this will prevent the Workflow from running (even if other files are changed)
-    paths-ignore:
-      - ".github/workflows/*"
+    # paths-ignore:
+    # - ".github/workflows/*"
 
 # set the working directory for all run steps in the workflow (does not affect "uses" Actions)
 defaults:
