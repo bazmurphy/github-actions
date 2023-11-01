@@ -65,7 +65,7 @@ jobs:
       - name: Deploy Code
         run: echo "Deploying...."
   lint-test-build-deploy:
-    needs: [lint, test, build]
+    needs: [lint, test, build, deploy]
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
