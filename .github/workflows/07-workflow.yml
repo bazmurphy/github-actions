@@ -38,7 +38,7 @@ jobs:
           # we give the Artifact a name, so we can retrieve it later
           name: dist-artifact
           # this defines which files you want to store
-          path: dist
+          path: 04-project/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
