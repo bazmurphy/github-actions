@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Output event data
         run: echo "${{ toJSON(github.event) }}"
+        # this step needs to run from the default directory because the 03-project folder doesn't exist yet
+        working-directory: ${{ github.workspace }}
       - name: Get code
         uses: actions/checkout@v3
       - name: Install dependencies
