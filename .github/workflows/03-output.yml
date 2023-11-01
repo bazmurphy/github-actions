@@ -1,0 +1,12 @@
+name: Output Information
+on: workflow_dispatch
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output GitHub Context
+        # github is a keyword used to access information about the workflow run
+        # we use the ${{ }} syntax
+        # we wrap it in the toJSON method provided by GitHub Action
+        # https://docs.github.com/en/actions/learn-github-actions/contexts
+        run: echo "${{ toJSON(github) }}"

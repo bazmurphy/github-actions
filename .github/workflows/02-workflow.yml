@@ -1,7 +1,6 @@
 name: Test and Deploy Second-Action Project
 # on: push
-# we can add multiple event triggers:
-on: [push, workflow_dispatch]
+on: [push, workflow_dispatch] # we can add multiple event triggers
 
 defaults:
   # set the working directory for all run steps in the workflow (does not affect "uses" Actions)
