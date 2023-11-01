@@ -1,13 +1,32 @@
 name: 06 Events
 on:
-  # specific Event
+  # Pull Request Event
   pull_request:
     # specific Activity Types
     types:
       # Activity Type Name
       - opened
-  # another Event
+    # the Workflow will only trigger on a pull_request to the following branches:
+    branches:
+      - main
+      - "dev-*" # dev-new1 dev-new2
+      - "feat/**" # feat/new1 feat/new/button
+  # Manually Triggered Event
   workflow_dispatch:
+  # Push Event
+  push:
+    # the Workflow will only trigger when a push happens on the following branches:
+    branches:
+      - main
+      - "dev-*" # dev-new1 dev-new2
+      - "feat/**" # feat/new1 feat/new/button
+    # files changed in the specified folder(s) will trigger the Workflow
+    paths:
+      - "03-project/**"
+    # files in the specified folder(s) will not trigger the Workflow
+    # if a file in the specified folder is changed this will prevent the Workflow from running (even if other files are changed)
+    paths-ignore:
+      - ".github/workflows/*"
 
 # set the working directory for all run steps in the workflow (does not affect "uses" Actions)
 defaults:
