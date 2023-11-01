@@ -1,8 +1,8 @@
 name: 04 Exercise
 on: [push, workflow_dispatch]
 
+# set the working directory for all run steps in the workflow (does not affect "uses" Actions)
 defaults:
-  # set the working directory for all run steps in the workflow (does not affect "uses" Actions)
   run:
     working-directory: 02-exercise
 

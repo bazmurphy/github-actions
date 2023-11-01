@@ -1,0 +1,31 @@
+name: 06 Events
+on:
+  # specific Event
+  pull_request:
+    # specific Activity Types
+    types:
+      # Activity Type Name
+      - opened
+  workflow_dispatch:
+
+# set the working directory for all run steps in the workflow (does not affect "uses" Actions)
+defaults:
+  run:
+    working-directory: 03-project
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output event data
+        run: echo "${{ toJSON(github.event) }}"
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Test code
+        run: npm run test
+      - name: Build code
+        run: npm run build
+      - name: Deploy project
+        run: echo "Deploying..."
