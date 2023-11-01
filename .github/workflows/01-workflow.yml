@@ -1,5 +1,5 @@
 # name: Workflow Name
-name: 01 First Workflow
+name: 01 Basic Workflow
 # on: When this Workflow will be Triggered
 # workflow_dispatch is an Event that waits for the User to manually start this Workflow
 on: workflow_dispatch
