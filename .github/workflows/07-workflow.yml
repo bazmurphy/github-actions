@@ -53,6 +53,8 @@ jobs:
           # we need to provide the Artifact identifier
           name: dist-artifact
       - name: Output Current Folder and Contents
+        # /home/runner/work/github-actions/github-actions
+        # assets, index.html, vite.svg
         run: |
           pwd
           ls
