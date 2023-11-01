@@ -1,4 +1,4 @@
-name: Test and Deploy Second-Action Project
+name: 02 Test and Deploy Second-Action Project
 # on: push
 on: [push, workflow_dispatch] # we can add multiple event triggers
 
