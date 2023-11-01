@@ -40,6 +40,10 @@ jobs:
           # this defines which files you want to store
           path: 04-project/dist
   deploy:
+    # this Job needs to run from the default directory because the 04-project folder doesn't exist
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
     needs: build # we need this because otherwise the Artifact will not have been uploaded and so could not be downloaded
     runs-on: ubuntu-latest
     steps:
@@ -54,5 +58,3 @@ jobs:
           ls
       - name: Deploy Code
         run: echo "Deploying..."
-        # this step needs to run from the default directory because the 03-project folder doesn't exist yet
-        working-directory: ${{ github.workspace }}
