@@ -64,23 +64,23 @@ jobs:
         run: npm run build
       - name: Deploy Code
         run: echo "Deploying...."
-  lint-test-build-deploy:
-    needs: [lint, test, build, deploy]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get Code
-        uses: actions/checkout@v4
-      - name: Install NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install Dependencies
-        run: npm ci
-      - name: Lint Code
-        run: npm run lint
-      - name: Test Code
-        run: npm test
-      - name: Build Code
-        run: npm run build
-      - name: Deploy Code
-        run: echo "Deploying...."
+  # lint-test-build-deploy:
+  #   needs: [lint, test, build, deploy]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get Code
+  #       uses: actions/checkout@v4
+  #     - name: Install NodeJS
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 18
+  #     - name: Install Dependencies
+  #       run: npm ci
+  #     - name: Lint Code
+  #       run: npm run lint
+  #     - name: Test Code
+  #       run: npm test
+  #     - name: Build Code
+  #       run: npm run build
+  #     - name: Deploy Code
+  #       run: echo "Deploying...."
