@@ -40,9 +40,18 @@ jobs:
           # this defines which files you want to store
           path: 04-project/dist
   deploy:
-    needs: build
+    needs: build # we need this because otherwise the Artifact will not have been uploaded and so could not be downloaded
     runs-on: ubuntu-latest
     steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          # we need to provide the Artifact identifier
+          name: dist-artifact
+      - name: Output Current Folder and Contents
+        run: |
+          pwd
+          ls
       - name: Deploy Code
         run: echo "Deploying..."
         # this step needs to run from the default directory because the 03-project folder doesn't exist yet
