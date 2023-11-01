@@ -24,6 +24,11 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    # We define the Outputs
+    outputs:
+      # We give it an identifier and use the GitHub Actions Context
+      # Using `steps` `id of the step` `outputs` `key name`
+      javascript-file: ${{ steps.publish.outputs.javascript-file }}
     steps:
       - name: Get Code
         uses: actions/checkout@v3
@@ -31,6 +36,15 @@ jobs:
         run: npm ci
       - name: Build Code
         run: npm run build
+        # We create a step to create an Output value
+      - name: Publish JS filename
+        # we can access data from this step via this id
+        id: publish
+        # a regular a linux command that:
+        # finds the javascript file in the assets folder
+        # you use an identifier key of your choice and store the value in it eg. javascript-file=filename.js
+        # it then writes that key=value pair into a special file $GITHUB_OUTPUT created by GitHub in the Environment your Job is running
+        run: find dist/assets/*.js -type f -execdir echo 'javascript-file={}' >> $GITHUB_OUTPUT ';'
         # This allows us to Upload Artifacts
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
