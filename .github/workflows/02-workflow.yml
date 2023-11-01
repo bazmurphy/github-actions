@@ -51,8 +51,8 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install Dependencies
         run: npm ci
-      - name: Build the Project
+      - name: Build Code
         run: npm run build
-      - name: Deploy
+      - name: Deploy Code
         # normally here we would upload it to a hosting provider
         run: echo "Deploying..."

@@ -13,27 +13,35 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Get code
+      - name: Get Code
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
-      - name: Lint code
+      - name: Lint Code
         run: npm run lint
-      - name: Test code
+      - name: Test Code
         run: npm run test
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Get code
+      - name: Get Code
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
-      - name: Build website
+      - name: Build Code
         run: npm run build
+        # This allows us to Upload Artifacts
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          # we give the Artifact a name, so we can retrieve it later
+          name: dist-artifact
+          # this defines which files you want to store
+          path: dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
+      - name: Deploy Code
         run: echo "Deploying..."
