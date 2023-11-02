@@ -18,8 +18,8 @@ jobs:
     # Set the environment variables at the Job level
     env:
       MONGODB_CLUSTER_ADDRESS: cluster0.3ekyupv.mongodb.net # some-test-database-address
-      MONGODB_USERNAME: some-username # some-test-database-username
-      MONGODB_PASSWORD: some-password # some-test-database-password
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }} # some-test-database-username
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }} # some-test-database-password
       PORT: 4000 # some-api-server-port
     runs-on: ubuntu-latest
     steps:
