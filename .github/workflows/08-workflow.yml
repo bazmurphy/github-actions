@@ -6,14 +6,15 @@ on:
       - dev
 # Set the environment variables at the Workflow level
 env:
-  MONGO_DB_NAME: some-database-name
+  MONGODB_DB_NAME: some-database-name # some-database-name
 jobs:
   test:
     # Set the environment variables at the Job level
     env:
-      MONGO_CLUSTER_ADDRESS: some-test-database-address
-      MONGO_USERNAME: some-test-database-username
-      MONGO_PASSWORD: some-test-database-password
+      MONGODB_CLUSTER_ADDRESS: cluster0.3ekyupv.mongodb.net # some-test-database-address
+      MONGODB_USERNAME: some-username # some-test-database-username
+      MONGODB_PASSWORD: some-password # some-test-database-password
+      PORT: 4000 # some-api-server-port
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -23,18 +24,26 @@ jobs:
         with:
           path: ~/.npm
           key: npm-deps-${{ hashFiles('./05-project/package-lock.json') }}
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
-      - name: Run server
-        run: npm start & npx wait-on http://127.0.0.1:XYZ
-      - name: Run tests
+      - name: Run Server
+        # we can use the Environment Variable here with interpolation $VARIABLE_NAME
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
+      - name: Run Tests
         run: npm test
-      - name: Output information
-        run: echo "..."
+      - name: Output Information
+        # we can use the Environment Variable here with GitHub Actions syntax
+        run: |
+          echo "MONGO_CLUSTER_ADDRESS: ${{ env.MONGODB_CLUSTER_ADDRESS}}"
+          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_PASSWORD: ${{ env.MONGODB_PASSWORD }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Output information
+      - name: Output Information
+        # the MONGODB_DB_NAME will be available here because it was defined at the Workflow level
+        # but the MONGODB_USERNAME will NOT be available here because it was defined at the Job level in `test`
         run: |
-          echo "..."
+          echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
+          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
