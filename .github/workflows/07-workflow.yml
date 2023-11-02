@@ -1,4 +1,4 @@
-name: 07 Artifacts
+name: 07 Artifacts & Caching
 on:
   push:
     branches:
@@ -15,7 +15,24 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
+      # we start the Cache here before the `Install Dependencies` Step
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        with:
+          # `path` is the files/folders that should be Cached
+          # if this folder exists it will be used, otherwise the Cache will be re-downloaded
+          # also the Action executes AGAIN when the Job finishes
+          # and will look at this folder and update the Cache if it didn't have it before or there are any changes
+          path: ~/.npm
+          # `key` is used for retrieving the Cache in the future and recreating those files/folder on the Runner
+          # the key also determines if the Cache should be discarded because something changed
+          # so we must give the key a dynamic name (using a GitHub Action function)
+          # now whenever the package-lock.json changes the hash produced will change and so the key name will change
+          # and when the key changes it will know to discard the Cache and recreate it
+          key: dependencies-node-modules-${{ hashFiles('package-lock.json') }}
       - name: Install Dependencies
+        # now the npm ci will automatically use the ./~npm folder
+        # if it exists it wil be used, if it doesn't exist the Dependencies will be re-downloaded
         run: npm ci
       - name: Lint Code
         run: npm run lint
@@ -32,6 +49,15 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
+        # we run the Cache Action again wherever we `Install Dependencies` in other Jobs
+      - name: Cache Dependencies
+        # the Cache is one central cache available across Jobs and Workflow Execution cycles
+        # so if we put our Dependencies into the Cache already with the `test` Job
+        # it is now also available here in the `build` Job
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: dependencies-node-modules-${{ hashFiles('package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Build Code
