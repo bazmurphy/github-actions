@@ -15,6 +15,9 @@ jobs:
     defaults:
       run:
         working-directory: 05-project
+    # Set the environment for this Job
+    # The Secrets will now come from those set in this Environment in the GitHub Repository
+    environment: testing
     # Set the environment variables at the Job level
     env:
       MONGODB_CLUSTER_ADDRESS: cluster0.3ekyupv.mongodb.net # some-test-database-address
