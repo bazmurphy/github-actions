@@ -57,7 +57,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: dependencies-node-modules-${{ hashFiles('package-lock.json') }}
+          key: dependencies-node-modules-${{ hashFiles('./04-project/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Build Code
