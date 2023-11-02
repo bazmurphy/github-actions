@@ -74,6 +74,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist-files
+          path: ./06-project/
       - name: Output Contents
         run: ls
       - name: Deploy
