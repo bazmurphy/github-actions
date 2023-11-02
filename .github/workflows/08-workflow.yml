@@ -5,17 +5,16 @@ on:
       - main
       - dev
 
-# set the working directory for all run steps in the workflow (does not affect "uses" Actions)
-defaults:
-  run:
-    working-directory: 05-project
-
 # Set the environment variables at the Workflow level
 env:
   MONGODB_DB_NAME: some-database-name # some-database-name
 
 jobs:
   test:
+    # set the working directory for all run steps in the Job (does not affect "uses" Actions)
+    defaults:
+      run:
+        working-directory: 05-project
     # Set the environment variables at the Job level
     env:
       MONGODB_CLUSTER_ADDRESS: cluster0.3ekyupv.mongodb.net # some-test-database-address
